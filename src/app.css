@@ -1,0 +1,25 @@
+:root {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    --primary-color: #223a2b;
+    --secondary-color: #b4b4a3;
+    --dark-color: #101c13;
+    --highlight-color: #6d9353;
+}
+
+body {
+    background-color: var(--primary-color);
+    background: linear-gradient(
+        180deg,
+        var(--primary-color),
+        var(--highlight-color),
+        var(--dark-color)
+    );
+    color: var(--secondary-color);
+    height: 100vh;
+    margin: 0;
+}
+
+h1 {
+    text-align: center;
+    font-size: 2rem;
+}
