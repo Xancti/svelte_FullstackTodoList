@@ -1,5 +1,38 @@
-<script>
+<script context="module" lang="ts">
+    // Module is only executed once across all instances; like onMount?
+    // Import load from sveltejs/kit
+    // create load async function which calls fetch
+    // resolution = await fetch of /todos.json (the api)
+    // IF: resolution.ok, set todos as res.json()
+    // return todos object as a prop
+    // ELSE: return error message 
+
+    import type { Load } from "@sveltejs/kit";
+    
+    export const load: Load = async ({ fetch }) => {
+        const res = await fetch("/todos.json");
+
+        if (res.ok) {
+            const todos = await res.json();
+            return {
+                props: { todos }
+            }
+        }
+
+        const { message } = await res.json();
+        return {
+            error: new Error(message)
+        }
+    };
+</script>
+
+<script lang="ts">
+    // Executed every time a component is rendered
     import TodoItem from "$lib/todo-item.svelte";
+
+    // This is how we specify a prop
+    export let todos: Todo[];
+    
 
     const title = "Todo | New";
 </script>
@@ -43,12 +76,12 @@
 <div class="todos">
     <h1>{title}</h1>
     
-    <form action="" method="" class="new">
+    <form action="/todos.json" method="post" class="new">
         <input type="text" name="todoInput" aria-label="Add a todo" placeholder="+ tap to add a todo">
     </form>
     
-    <TodoItem />
-    <TodoItem />
-    <TodoItem />
+    {#each todos as todo}
+        <TodoItem {todo}/>
+    {/each}
 
 </div>
