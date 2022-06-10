@@ -11,6 +11,7 @@
     
     export const load: Load = async ({ fetch }) => {
         const res = await fetch("/todos.json");
+        // essentially a get request
 
         if (res.ok) {
             const todos = await res.json();
@@ -82,6 +83,8 @@
     
     {#each todos as todo}
         <TodoItem {todo}/>
+        <!-- Something about passing props that sends all the data over; 
+             in effect it is bidirectional comms? -->
     {/each}
 
 </div>

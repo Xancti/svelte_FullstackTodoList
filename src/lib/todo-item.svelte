@@ -95,8 +95,11 @@
         <input type="text" value={todo.text} />
         <button aria-label="Save todo" class="save"></button>
     </form>
-
-    <form action="" method="">
+    
+    <!-- HTML form only supports get or post
+    Create an _method param in request object that is == delete -->
+    <form method="post" action="/todos/{todo.uid}.json?_method=DELETE">
         <button aria-label="Delete todo" class="delete"></button>
     </form>
 </div>
+
